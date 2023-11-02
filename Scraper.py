@@ -16,7 +16,7 @@ rate_limit = 0.111  # 1 / 9
 
 rate_limit_counter = 0
 
-csv_file = open("pubmed_data.csv", "w", newline="", encoding="utf-8")
+csv_file = open("pubmed_data_full.csv", "w", newline="", encoding="utf-8")
 csv_writer = csv.writer(csv_file)
 
 csv_writer.writerow(["PubMed ID", "Title", "URL", "Abstract"])
@@ -65,8 +65,10 @@ while True:
                 article_title = soup.find("ArticleTitle")
                 title = article_title.get_text() if article_title else "No Title Available"
 
-                abstract_text = soup.find("AbstractText")
-                abstract = abstract_text.get_text() if abstract_text else "No Abstract Available"
+                # Combine all abstract paragraphs into a single string
+                abstract_text_elements = soup.find_all("AbstractText")
+                abstract = " ".join([text.get_text()
+                                     for text in abstract_text_elements])
 
                 url = f"https://pubmed.ncbi.nlm.nih.gov/{pmid}"
                 csv_writer.writerow([pmid, title, url, abstract])
