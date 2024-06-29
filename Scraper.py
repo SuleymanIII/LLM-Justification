@@ -6,7 +6,7 @@ import time
 
 query = "drug mechanism of action drug efficacy clinical trials evidence-based medicine"
 
-api_key = "80a14182d2240f849caa221db246275dee08"
+api_key = "APIKEYHERE"
 
 pubmed_api_url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi"
 
